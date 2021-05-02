@@ -1,0 +1,92 @@
+判断链表中是否有环1
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(!head || !head->next)
+        return false;
+        ListNode *cur = head;
+        ListNode *per = head->next;
+        while(cur != per)
+        {
+            if(!per||!per->next)
+            return false;
+            cur = cur->next;
+            per = per->next->next; 
+        }
+        return true;
+    }
+};
+
+
+
+判断链表中是否有环2
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(!head||!head->next)
+        return NULL;
+        //int index = 0;
+        ListNode *cur = head;
+        ListNode *per = head->next;
+        while(cur!=per)
+        {
+            if(!per||!per->next)
+            return NULL;
+            cur=cur->next;
+            per=per->next->next;
+            //index++;
+        }
+        ListNode *ptr = head;
+        while(cur!=ptr)
+        {
+            cur = cur->next;
+            ptr = ptr->next;
+        }
+        return ptr;
+    }
+};
+
+
+
+反转链表
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+    ListNode *cur = NULL;
+    ListNode *per = head;
+    while(per)
+    {
+        ListNode *t = per->next;
+        per->next = cur;
+        cur = per;
+        per = t;
+    }
+    return cur;
+    }
+};
